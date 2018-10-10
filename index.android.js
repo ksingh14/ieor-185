@@ -29,11 +29,10 @@ import Button from './src/components/Button';
 import Label from './src/components/Label';
 
 const Persons = [
-  {name: 'Barrack Obama', image: 'https://pbs.twimg.com/profile_images/451007105391022080/iu1f7brY_400x400.png'},
-  {name: 'Albert Einstein', image: 'http://www.deism.com/images/Einstein_laughing.jpeg'},
-  {name: 'The Beast', image: 'http://vignette2.wikia.nocookie.net/marveldatabase/images/4/43/Henry_McCoy_(Earth-10005)_0002.jpg/revision/latest?cb=20091116202257'},
-  {name: 'Me', image: 'https://avatars0.githubusercontent.com/u/1843898?v=3&s=460'},
-  {name: 'HellBoy', image: 'http://www.flickeringmyth.com/wp-content/uploads/2014/06/Ron-Perlman-as-Hellboy.jpg'}
+  {name: 'Mike Trout', image: 'http://cdn.sonsofsamhorn.com/wp-content/uploads/2016/09/Trout-MVP.jpg'},
+  {name: 'Manny Machado', image: 'https://armchairallamericans.com/wp-content/uploads/2018/07/Machado-1068x1218.jpg'},
+  {name: 'Bryce Harper', image: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Bryce_Harper_2017.jpg'},
+  {name: 'Justin Verlander', image: 'https://specials-images.forbesimg.com/imageserve/5756e572a7ea43396db26def/416x416.jpg?background=000000&cropX1=269&cropX2=552&cropY1=16&cropY2=300'}
 ]
 
 // How far the swipe need to go for a yes/ no to fire
@@ -123,10 +122,10 @@ class Card extends Component {
           <Animated.View style={[styles.card, this.props.animatedCardStyles]} {...this.props.panResponder}>
             <Image source={{uri: this.props.image}} style={styles.cardImage}>
               <Animated.View style={[styles.cardImageTextContainer, styles.cardImageYupContainer, this.props.animatedYupStyles]}>
-                <Text style={[styles.cardImageText, styles.cardImageYupText]}>LOVE</Text>
+                <Text style={[styles.cardImageText, styles.cardImageYupText]}>LIKE</Text>
               </Animated.View>
               <Animated.View style={[styles.cardImageTextContainer, styles.cardImageNopeContainer, this.props.animatedNopeStyles]}>
-                <Text style={[styles.cardImageText, styles.cardImageNopeText]}>NEIN</Text>
+                <Text style={[styles.cardImageText, styles.cardImageNopeText]}>DISLIKE</Text>
               </Animated.View>
             </Image>
             <View style={styles.cardLabelContainer}>
@@ -297,12 +296,12 @@ class SwipeCards extends Component {
           <View style={styles.buttonsContainer}>
             <View style={styles.buttonContainer}>
               <TouchableHighlight style={[styles.button, styles.buttonNope]} underlayColor='#EEE' onPress={() => {this.handleNopePress()}}>
-                  <Text style={styles.nopeText}>Nein!</Text>
+                  <Text style={styles.nopeText}>Dislike</Text>
               </TouchableHighlight>
             </View>
             <View style={styles.buttonContainer}>
               <TouchableHighlight style={[styles.button, styles.buttonYup]} underlayColor='#EEE' onPress={() => {this.handleYupPress()}}>
-                  <Text style={styles.yupText}>Love!</Text>
+                  <Text style={styles.yupText}>Like</Text>
               </TouchableHighlight>
             </View>
           </View>
