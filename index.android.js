@@ -57,6 +57,8 @@ class App extends Component {
         return (<Login navigator = {navigator} />);
       case 'SwipeCards':
         return (<SwipeCards navigator = {navigator} />);
+      case 'RightSwipe':
+        return (<RightSwipeBet navigator = {navigator} />);
     }
   }
 
@@ -74,7 +76,7 @@ class Login extends Component {
             </Container>
 
             <Container>
-                <Label text="Username or Email" />
+                  <Label text="Username or Email" />
                 <TextInput
                     style={styles.textInput}
                 />
@@ -110,6 +112,30 @@ class Login extends Component {
                 </Container>
             </View>
         </ScrollView>
+    );
+  }
+}
+
+
+class RightSwipeBet extends Component {
+ constructor() {
+    super();
+    this.state = {count: 0};
+  }
+
+  render () {
+    return (
+      <View style={styles.container}>
+        <Text>{this.state.count}</Text>
+        <Button
+          title="increase"
+          onPress={() => this.setState({ count: this.state.count + 1 })}
+        />
+        <Button
+          title="decrease"
+          onPress={() => this.setState({ count: this.state.count - 1 })}
+        />
+      </View>
     );
   }
 }
@@ -161,9 +187,9 @@ class SwipeCards extends Component {
   }
 
   _animateEntrance() {
-    // Animated.timing(this.state.nextCardOpacity, {
-    //          toValue: 1,
-    //    }).start()
+  //   Animated.timing(this.state.nextCardOpacity, {
+  //            toValue: 1,
+  //      }).start()
   }
 
   componentWillMount() {
@@ -220,12 +246,13 @@ class SwipeCards extends Component {
   }
 
   handleYupPress() {
-      let screenwidth = Dimensions.get('window').width;
+      /*let screenwidth = Dimensions.get('window').width;
       let panlength = screenwidth + 100
 
       Animated.timing(this.state.pan, {
             toValue: {x: panlength, y: 0}
-      }).start(this._resetState.bind(this))
+      }).start(this._resetState.bind(this))*/
+
   }
 
   render() {
@@ -300,7 +327,7 @@ class SwipeCards extends Component {
               </TouchableHighlight>
             </View>
             <View style={styles.buttonContainer}>
-              <TouchableHighlight style={[styles.button, styles.buttonYup]} underlayColor='#EEE' onPress={() => {this.handleYupPress()}}>
+              <TouchableHighlight style={[styles.button, styles.buttonYup]} underlayColor='#EEE' onPress={() => {this.props.navigator.push('RightSwipe')}}>
                   <Text style={styles.yupText}>Like</Text>
               </TouchableHighlight>
             </View>
