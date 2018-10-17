@@ -58,7 +58,11 @@ class App extends Component {
       case 'SwipeCards':
         return (<SwipeCards navigator = {navigator} />);
       case 'RightSwipe':
-        return (<RightSwipeBet navigator = {navigator} />);
+        return (<RightSwipe navigator = {navigator} />);
+      case 'OptionScreen':
+        return (<OptionScreen navigator = {navigator} />);
+      case 'MakeBet':
+        return (<MakeBet navigator = {navigator} />)
     }
   }
 
@@ -116,8 +120,27 @@ class Login extends Component {
   }
 }
 
+class OptionScreen extends Component {
+  render () {
+    //two buttons
+    return (
+      );
+  }
+}
 
-class RightSwipeBet extends Component {
+class MakeBet extends Component {
+  constructor() {
+    super()
+    //global var for self bet here
+  }
+
+  render() {
+    return (
+      );
+  }
+}
+
+class RightSwipe extends Component {
  constructor() {
     super();
     this.state = {count: 0};
@@ -327,12 +350,11 @@ class SwipeCards extends Component {
               </TouchableHighlight>
             </View>
             <View style={styles.buttonContainer}>
-              <TouchableHighlight style={[styles.button, styles.buttonYup]} underlayColor='#EEE' onPress={() => {this.props.navigator.push('RightSwipe')}}>
+              <TouchableHighlight style={[styles.button, styles.buttonYup]} underlayColor='#EEE' onPress={() => {this.props.navigator.push({id: 'RightSwipe'})}}>
                   <Text style={styles.yupText}>Like</Text>
               </TouchableHighlight>
             </View>
           </View>
-
           <View style={styles.cardsContainer}>
             <Card key={person3.name} {...person2} {...card3AnimatedStyles}/>
             <Card key={person2.name} {...person2} {...card2AnimatedStyles}/>
