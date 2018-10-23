@@ -29,10 +29,10 @@ import Button from './src/components/Button';
 import Label from './src/components/Label';
 
 const Persons = [
-  {name: 'Mike Trout', image: 'http://cdn.sonsofsamhorn.com/wp-content/uploads/2016/09/Trout-MVP.jpg'},
-  {name: 'Manny Machado', image: 'https://armchairallamericans.com/wp-content/uploads/2018/07/Machado-1068x1218.jpg'},
-  {name: 'Bryce Harper', image: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Bryce_Harper_2017.jpg'},
-  {name: 'Justin Verlander', image: 'https://specials-images.forbesimg.com/imageserve/5756e572a7ea43396db26def/416x416.jpg?background=000000&cropX1=269&cropX2=552&cropY1=16&cropY2=300'}
+  {name: 'Grand Slam', image: 'https://i.imgur.com/q75n3Pv.png'},
+  {name: 'No Hitter', image: 'https://i.imgur.com/BwC4ZhE.png'},
+  {name: 'Score Inning', image: 'https://i.imgur.com/sSt2TAA.png'},
+  {name: 'Win Game', image: 'https://i.imgur.com/s9HH7Tc.png'}
 ]
 
 // How far the swipe need to go for a yes/ no to fire
@@ -120,8 +120,8 @@ class Login extends Component {
   }
 }
 
-class OptionScreen extends Component {
-  render () {
+/*class OptionScreen extends Component {
+  render() {
     //two buttons
     return (
       );
@@ -138,7 +138,7 @@ class MakeBet extends Component {
     return (
       );
   }
-}
+}*/
 
 class RightSwipe extends Component {
  constructor() {
@@ -269,12 +269,12 @@ class SwipeCards extends Component {
   }
 
   handleYupPress() {
-      /*let screenwidth = Dimensions.get('window').width;
+      let screenwidth = Dimensions.get('window').width;
       let panlength = screenwidth + 100
 
       Animated.timing(this.state.pan, {
             toValue: {x: panlength, y: 0}
-      }).start(this._resetState.bind(this))*/
+      }).start(this._resetState.bind(this))
 
   }
 
@@ -350,7 +350,7 @@ class SwipeCards extends Component {
               </TouchableHighlight>
             </View>
             <View style={styles.buttonContainer}>
-              <TouchableHighlight style={[styles.button, styles.buttonYup]} underlayColor='#EEE' onPress={() => {this.props.navigator.push({id: 'RightSwipe'})}}>
+              <TouchableHighlight style={[styles.button, styles.buttonYup]} underlayColor='#EEE' onPress={() => {this.handleYupPress()}}>
                   <Text style={styles.yupText}>Like</Text>
               </TouchableHighlight>
             </View>
