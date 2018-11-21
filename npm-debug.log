@@ -1,0 +1,211 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'npm',
+1 verbose cli   'install',
+1 verbose cli   'react-native-deck-swiper',
+1 verbose cli   '--save' ]
+2 info using npm@3.10.10
+3 info using node@v6.14.3
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData npm
+8 silly fetchPackageMetaData install
+9 silly fetchPackageMetaData react-native-deck-swiper
+10 silly fetchNamedPackageData npm
+11 silly mapToRegistry name npm
+12 silly mapToRegistry using default registry
+13 silly mapToRegistry registry https://registry.npmjs.org/
+14 silly mapToRegistry data Result {
+14 silly mapToRegistry   raw: 'npm',
+14 silly mapToRegistry   scope: null,
+14 silly mapToRegistry   escapedName: 'npm',
+14 silly mapToRegistry   name: 'npm',
+14 silly mapToRegistry   rawSpec: '',
+14 silly mapToRegistry   spec: 'latest',
+14 silly mapToRegistry   type: 'tag' }
+15 silly mapToRegistry uri https://registry.npmjs.org/npm
+16 silly fetchNamedPackageData install
+17 silly mapToRegistry name install
+18 silly mapToRegistry using default registry
+19 silly mapToRegistry registry https://registry.npmjs.org/
+20 silly mapToRegistry data Result {
+20 silly mapToRegistry   raw: 'install',
+20 silly mapToRegistry   scope: null,
+20 silly mapToRegistry   escapedName: 'install',
+20 silly mapToRegistry   name: 'install',
+20 silly mapToRegistry   rawSpec: '',
+20 silly mapToRegistry   spec: 'latest',
+20 silly mapToRegistry   type: 'tag' }
+21 silly mapToRegistry uri https://registry.npmjs.org/install
+22 silly fetchNamedPackageData react-native-deck-swiper
+23 silly mapToRegistry name react-native-deck-swiper
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'react-native-deck-swiper',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'react-native-deck-swiper',
+26 silly mapToRegistry   name: 'react-native-deck-swiper',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/react-native-deck-swiper
+28 verbose request uri https://registry.npmjs.org/install
+29 verbose request no auth needed
+30 info attempt registry request try #1 at 7:15:52 PM
+31 verbose request id 60778bc4f97b6f49
+32 verbose etag W/"5963119bd9b86578664f710277d9217c"
+33 verbose lastModified Tue, 26 Jun 2018 19:44:14 GMT
+34 http request GET https://registry.npmjs.org/install
+35 verbose request uri https://registry.npmjs.org/react-native-deck-swiper
+36 verbose request no auth needed
+37 info attempt registry request try #1 at 7:15:52 PM
+38 verbose etag W/"1b111a2eb41d8b4355dd66baa81fc3bc"
+39 verbose lastModified Sat, 29 Sep 2018 03:20:18 GMT
+40 http request GET https://registry.npmjs.org/react-native-deck-swiper
+41 verbose request uri https://registry.npmjs.org/npm
+42 verbose request no auth needed
+43 info attempt registry request try #1 at 7:15:52 PM
+44 verbose etag "819232ae9bba0c3d9339a84460665764"
+45 verbose lastModified Wed, 29 Aug 2018 18:23:44 GMT
+46 http request GET https://registry.npmjs.org/npm
+47 info retry will retry, error on last attempt: Error: getaddrinfo EAI_AGAIN registry.npmjs.org:443
+48 info retry will retry, error on last attempt: Error: getaddrinfo EAI_AGAIN registry.npmjs.org:443
+49 info retry will retry, error on last attempt: Error: getaddrinfo EAI_AGAIN registry.npmjs.org:443
+50 info attempt registry request try #2 at 7:16:22 PM
+51 verbose etag W/"5963119bd9b86578664f710277d9217c"
+52 verbose lastModified Tue, 26 Jun 2018 19:44:14 GMT
+53 http request GET https://registry.npmjs.org/install
+54 info attempt registry request try #2 at 7:16:23 PM
+55 verbose etag W/"1b111a2eb41d8b4355dd66baa81fc3bc"
+56 verbose lastModified Sat, 29 Sep 2018 03:20:18 GMT
+57 http request GET https://registry.npmjs.org/react-native-deck-swiper
+58 info attempt registry request try #2 at 7:16:23 PM
+59 verbose etag "819232ae9bba0c3d9339a84460665764"
+60 verbose lastModified Wed, 29 Aug 2018 18:23:44 GMT
+61 http request GET https://registry.npmjs.org/npm
+62 http 304 https://registry.npmjs.org/npm
+63 verbose headers { date: 'Wed, 03 Oct 2018 02:16:23 GMT',
+63 verbose headers   connection: 'keep-alive',
+63 verbose headers   'set-cookie': [ '__cfduid=d229441650b0c668eaaea684e0e3c93971538532983; expires=Thu, 03-Oct-19 02:16:23 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+63 verbose headers   'cf-cache-status': 'HIT',
+63 verbose headers   'cache-control': 'max-age=300',
+63 verbose headers   'cf-ray': '463be80bfd8227fe-SJC',
+63 verbose headers   etag: '"819232ae9bba0c3d9339a84460665764"',
+63 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+63 verbose headers   'last-modified': 'Wed, 29 Aug 2018 18:23:44 GMT',
+63 verbose headers   vary: 'accept-encoding, accept',
+63 verbose headers   'x-amz-meta-rev': '1984-3da252d93ed0670df494eabc793a1b6c',
+63 verbose headers   server: 'cloudflare' }
+64 silly get cb [ 304,
+64 silly get   { date: 'Wed, 03 Oct 2018 02:16:23 GMT',
+64 silly get     connection: 'keep-alive',
+64 silly get     'set-cookie': [ '__cfduid=d229441650b0c668eaaea684e0e3c93971538532983; expires=Thu, 03-Oct-19 02:16:23 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+64 silly get     'cf-cache-status': 'HIT',
+64 silly get     'cache-control': 'max-age=300',
+64 silly get     'cf-ray': '463be80bfd8227fe-SJC',
+64 silly get     etag: '"819232ae9bba0c3d9339a84460665764"',
+64 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+64 silly get     'last-modified': 'Wed, 29 Aug 2018 18:23:44 GMT',
+64 silly get     vary: 'accept-encoding, accept',
+64 silly get     'x-amz-meta-rev': '1984-3da252d93ed0670df494eabc793a1b6c',
+64 silly get     server: 'cloudflare' } ]
+65 verbose etag https://registry.npmjs.org/npm from cache
+66 verbose get saving npm to /home/alex/.npm/registry.npmjs.org/npm/.cache.json
+67 verbose correctMkdir /home/alex/.npm correctMkdir not in flight; initializing
+68 http 304 https://registry.npmjs.org/react-native-deck-swiper
+69 verbose headers { date: 'Wed, 03 Oct 2018 02:16:23 GMT',
+69 verbose headers   connection: 'keep-alive',
+69 verbose headers   'set-cookie': [ '__cfduid=d1d1eb8cd2ea90ef72f751383c97ca0c31538532983; expires=Thu, 03-Oct-19 02:16:23 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+69 verbose headers   'cf-cache-status': 'HIT',
+69 verbose headers   'cache-control': 'max-age=300',
+69 verbose headers   'cf-ray': '463be80bf8729619-SJC',
+69 verbose headers   etag: '"1b111a2eb41d8b4355dd66baa81fc3bc"',
+69 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+69 verbose headers   'last-modified': 'Sat, 29 Sep 2018 03:20:18 GMT',
+69 verbose headers   vary: 'accept-encoding, accept',
+69 verbose headers   'x-amz-meta-rev': '66-f9d99f724393a06ef4f3469030e30deb',
+69 verbose headers   server: 'cloudflare' }
+70 silly get cb [ 304,
+70 silly get   { date: 'Wed, 03 Oct 2018 02:16:23 GMT',
+70 silly get     connection: 'keep-alive',
+70 silly get     'set-cookie': [ '__cfduid=d1d1eb8cd2ea90ef72f751383c97ca0c31538532983; expires=Thu, 03-Oct-19 02:16:23 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+70 silly get     'cf-cache-status': 'HIT',
+70 silly get     'cache-control': 'max-age=300',
+70 silly get     'cf-ray': '463be80bf8729619-SJC',
+70 silly get     etag: '"1b111a2eb41d8b4355dd66baa81fc3bc"',
+70 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+70 silly get     'last-modified': 'Sat, 29 Sep 2018 03:20:18 GMT',
+70 silly get     vary: 'accept-encoding, accept',
+70 silly get     'x-amz-meta-rev': '66-f9d99f724393a06ef4f3469030e30deb',
+70 silly get     server: 'cloudflare' } ]
+71 verbose etag https://registry.npmjs.org/react-native-deck-swiper from cache
+72 verbose get saving react-native-deck-swiper to /home/alex/.npm/registry.npmjs.org/react-native-deck-swiper/.cache.json
+73 verbose correctMkdir /home/alex/.npm correctMkdir already in flight; waiting
+74 http 304 https://registry.npmjs.org/install
+75 verbose headers { date: 'Wed, 03 Oct 2018 02:16:27 GMT',
+75 verbose headers   connection: 'keep-alive',
+75 verbose headers   'set-cookie': [ '__cfduid=d6baf0e9d9117c0acddcb884d7fc9b9211538532987; expires=Thu, 03-Oct-19 02:16:27 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+75 verbose headers   'cf-cache-status': 'HIT',
+75 verbose headers   'cache-control': 'max-age=300',
+75 verbose headers   'cf-ray': '463be8268ffd93c0-SJC',
+75 verbose headers   etag: '"5963119bd9b86578664f710277d9217c"',
+75 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+75 verbose headers   'last-modified': 'Tue, 26 Jun 2018 19:44:14 GMT',
+75 verbose headers   vary: 'accept-encoding, accept',
+75 verbose headers   server: 'cloudflare' }
+76 silly get cb [ 304,
+76 silly get   { date: 'Wed, 03 Oct 2018 02:16:27 GMT',
+76 silly get     connection: 'keep-alive',
+76 silly get     'set-cookie': [ '__cfduid=d6baf0e9d9117c0acddcb884d7fc9b9211538532987; expires=Thu, 03-Oct-19 02:16:27 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+76 silly get     'cf-cache-status': 'HIT',
+76 silly get     'cache-control': 'max-age=300',
+76 silly get     'cf-ray': '463be8268ffd93c0-SJC',
+76 silly get     etag: '"5963119bd9b86578664f710277d9217c"',
+76 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+76 silly get     'last-modified': 'Tue, 26 Jun 2018 19:44:14 GMT',
+76 silly get     vary: 'accept-encoding, accept',
+76 silly get     server: 'cloudflare' } ]
+77 verbose etag https://registry.npmjs.org/install from cache
+78 verbose get saving install to /home/alex/.npm/registry.npmjs.org/install/.cache.json
+79 verbose correctMkdir /home/alex/.npm correctMkdir not in flight; initializing
+80 silly install normalizeTree
+81 silly loadCurrentTree Finishing
+82 silly loadIdealTree Starting
+83 silly install loadIdealTree
+84 silly cloneCurrentTree Starting
+85 silly install cloneCurrentTreeToIdealTree
+86 silly cloneCurrentTree Finishing
+87 silly loadShrinkwrap Starting
+88 silly install loadShrinkwrap
+89 silly loadShrinkwrap Finishing
+90 silly loadAllDepsIntoIdealTree Starting
+91 silly install loadAllDepsIntoIdealTree
+92 silly rollbackFailedOptional Starting
+93 silly rollbackFailedOptional Finishing
+94 silly runTopLevelLifecycles Finishing
+95 silly install printInstalled
+96 verbose stack Error: Refusing to install react-native-deck-swiper as a dependency of itself
+96 verbose stack     at checkSelf (/usr/lib/node_modules/npm/lib/install/validate-args.js:53:14)
+96 verbose stack     at Array.<anonymous> (/usr/lib/node_modules/npm/node_modules/slide/lib/bind-actor.js:15:8)
+96 verbose stack     at LOOP (/usr/lib/node_modules/npm/node_modules/slide/lib/chain.js:15:14)
+96 verbose stack     at chain (/usr/lib/node_modules/npm/node_modules/slide/lib/chain.js:20:5)
+96 verbose stack     at /usr/lib/node_modules/npm/lib/install/validate-args.js:16:5
+96 verbose stack     at /usr/lib/node_modules/npm/node_modules/slide/lib/async-map.js:52:35
+96 verbose stack     at Array.forEach (native)
+96 verbose stack     at /usr/lib/node_modules/npm/node_modules/slide/lib/async-map.js:52:11
+96 verbose stack     at Array.forEach (native)
+96 verbose stack     at asyncMap (/usr/lib/node_modules/npm/node_modules/slide/lib/async-map.js:51:8)
+97 verbose cwd /home/alex/ieor-185
+98 error Linux 4.15.0-36-generic
+99 error argv "/usr/bin/node" "/usr/bin/npm" "install" "npm" "install" "react-native-deck-swiper" "--save"
+100 error node v6.14.3
+101 error npm  v3.10.10
+102 error code ENOSELF
+103 error Refusing to install react-native-deck-swiper as a dependency of itself
+104 error If you need help, you may report this error at:
+104 error     <https://github.com/npm/npm/issues>
+105 verbose exit [ 1, true ]
