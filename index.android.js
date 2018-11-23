@@ -15,10 +15,19 @@ import React, {
   PanResponder,
   Image,
   TouchableHeight,
+  StatusBar,
   TextInput,
   ScrollView,
   TouchableHighlight
 } from 'react-native';
+
+
+import { SafeAreaView, createMaterialTopTabNavigator } from 'react-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { MarginButton } from './src/components/ButtonWithMargin';
+// navigation tools: tabs at bottom
+//https://github.com/react-navigation/react-navigation/blob/master/examples/NavigationPlayground/js/CustomTabUI.js
+
 
 import clamp from 'clamp';
 import Dimensions from 'Dimensions';
@@ -275,6 +284,7 @@ class SwipeCards extends Component {
       Animated.timing(this.state.pan, {
             toValue: {x: panlength, y: 0}
       }).start(this._resetState.bind(this))
+      
 
   }
 
@@ -520,6 +530,49 @@ var styles = StyleSheet.create({
   },
 
 });
+
+
+const SimpleTabs = createMaterialTopTabNavigator({
+  Users: UserScreen,
+  Scores: ScoresScreen,
+  Bets: PlaceBetsScreen,
+});
+
+
+//navigation components
+class TabNavigator extends React.Component {
+  static router = SimpleTabs.router;
+  componentWillUpdate() {
+    LayoutAnimation.easeInEaseOut();
+  }
+  render() {
+    const { navigation } = this.props;
+    const { routes, index } = navigation.state;
+    const activeRoute = routes[index];
+    let bottom = null;
+    /*if(activeRoute.routeName !== 'Home') {
+      bottom = (
+        <View style={{ height: 50, borderTopWidth: StyleSheet.hairlineWidth }}>
+          <Button title="Check out" onPress={() => {}} />
+        </View>
+      );
+    }*/
+    return (
+      <View style={{ flex: 1 }}>
+        <StatusBar barStyle="default" />
+        <SafeAreaView
+          style={{ flex: 1 }}
+          forceInset={{ horizontal: 'always', top: 'always' }}
+        >
+          <SimpleTabs navigation={navigation} />
+        </SafeAreaView>
+        {bottom}
+      </View>
+    );
+  }
+}
+
+
 
 AppRegistry.registerComponent('ReactNativeTinderSwipe', () => App);
 
