@@ -3,9 +3,9 @@
  * https://github.com/facebook/react-native
  */
 'use strict';
-import React, {
+import React, { Component } from 'react';
+import {
   AppRegistry,
-  Component,
   StyleSheet,
   Text,
   View,
@@ -17,8 +17,11 @@ import React, {
   TouchableHeight,
   TextInput,
   ScrollView,
-  TouchableHighlight
+  TouchableHighlight,
+  AsyncStorage, 
+  TouchableOpacity
 } from 'react-native';
+import { NavigationBar } from 'navigationbar-react-native';
 
 import clamp from 'clamp';
 import Dimensions from 'Dimensions';
@@ -41,6 +44,45 @@ var SWIPE_THRESHOLD = 120;
 var NEXT_CARD_POSITION_OFFSET = 4;
 var NEXT_CARD_SIZE_OFFSET = 8;
 
+/*
+const ComponentLeft = () => {
+  return(
+    <View style={{ flex: 1, alignItems: 'flex-start'}} >
+       <TouchableOpacity style={ {justifyContent:'center', flexDirection: 'row'}}>
+        <Image 
+          source={require('./scores.png')}
+          style={{ resizeMode: 'contain', width: 20, height: 20, alignSelf: 'center' }}
+          onPress={() => this.props.navigator.push({id: 'SwipeCards'})}/>
+      </TouchableOpacity>
+    </View>
+  );
+};
+ 
+const ComponentCenter = () => {
+  return(
+    <TouchableOpacity onPress={() => this.props.navigator.push({id: 'SwipeCards'})}>
+       <Image
+        source={require('./placingBet.png')}
+        style={{resizeMode: 'contain', width: 200, height: 35, alignSelf: 'center' }}
+        onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
+    </TouchableOpacity>
+  );
+};
+ 
+const ComponentRight = () => {
+  return(
+    <View style={{ flex: 1, alignItems: 'flex-end', }}>
+      <TouchableOpacity>
+        <Image 
+          source={require('./userImage.png')}
+          style={{ resizeMode: 'contain', width: 20, height: 20, alignSelf: 'center' }}
+          onPress={() => this.props.navigator.push({id: 'ProfilePage'})}/>
+      </TouchableOpacity>
+    </View>
+  );
+};
+*/
+
 
 class App extends Component {
   render() {
@@ -57,6 +99,8 @@ class App extends Component {
         return (<Login navigator = {navigator} />);
       case 'SwipeCards':
         return (<SwipeCards navigator = {navigator} />);
+      case 'ProfilePage':
+        return (<ProfilePage navigator = {navigator} />);
       case 'RightSwipe':
         return (<RightSwipe navigator = {navigator} />);
       case 'OptionScreen':
@@ -69,6 +113,9 @@ class App extends Component {
 }
 
 class Login extends Component {
+
+  state = {'username': '', 'password': ''};
+
   render() {
     return (
         <ScrollView style={styles.scroll}>
@@ -83,6 +130,8 @@ class Login extends Component {
                   <Label text="Username or Email" />
                 <TextInput
                     style={styles.textInput}
+                    value={this.state.username}
+                    onChangeText={ (username) => this.setState({ username }) }
                 />
             </Container>
             <Container>
@@ -90,6 +139,8 @@ class Login extends Component {
                 <TextInput
                     secureTextEntry={true}
                     style={styles.textInput}
+                    value={this.state.password}
+                    onChangeText={ (password) => this.setState({ password }) }
                 />
             </Container>
 
@@ -108,6 +159,22 @@ class Login extends Component {
                         styles={{button: styles.primaryButton, label: styles.buttonWhiteText}} 
                         onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
                 </Container>
+
+                <Container>
+                    <Button 
+                        label="Save Data" 
+                        styles={{button: styles.primaryButton, label: styles.buttonWhiteText}} 
+                        onPress={this._storeItem.bind(this)} />
+                </Container>
+
+                <Container>
+                    <Button 
+                        label="View Profile" 
+                        styles={{button: styles.primaryButton, label: styles.buttonWhiteText}} 
+                        onPress={() => this.props.navigator.push({id: 'ProfilePage'})} />
+                </Container>
+
+
                 <Container>
                     <Button 
                         label="CANCEL" 
@@ -118,6 +185,15 @@ class Login extends Component {
         </ScrollView>
     );
   }
+
+  async _storeItem () {
+  try {
+    const username = this.state.username;
+    await AsyncStorage.setItem('userData', username);
+  } catch (error) {
+    console.log(error);
+  }
+}
 }
 
 /*class OptionScreen extends Component {
@@ -127,18 +203,153 @@ class Login extends Component {
       );
   }
 }
-
 class MakeBet extends Component {
   constructor() {
     super()
     //global var for self bet here
   }
-
   render() {
     return (
       );
   }
 }*/
+
+
+
+class Bar2 extends Component {
+  render() {
+    return (
+
+        <View style = {styles.bar2}>
+          <View style = {[styles.barItem, styles.barSeparator]}>
+            <Text style = {styles.barTop}> 0 </Text>
+            <Text style = {styles.barBottom}> Tokens </Text>
+          </View>
+
+          <View style = {[styles.barItem, styles.barSeparator]}>
+            <Text style = {styles.barTop}> 0 </Text>
+            <Text style = {styles.barBottom}> Tokens Won </Text>
+          </View>
+
+          <View style = {styles.barItem}>
+            <Text style = {styles.barTop}> 0 </Text>
+            <Text style = {styles.barBottom}> Tokens Lost </Text>
+          </View>
+
+        </View>
+
+    );
+  }
+}
+
+class Header2 extends Component {
+
+  state = { username: '' };
+
+  async componentWillMount() {
+    const usernameGet = await AsyncStorage.getItem('userData');
+    if (usernameGet) {
+      this.setState({ username: usernameGet });
+    } else {
+      this.setState({ username: false });
+    }
+  }
+
+  render() {
+    return (
+      <Image style = {styles.headerBackgroundProf} source = {require('./userBackground.jpg')}>
+        <View style = {styles.headerProf}>
+
+          <View style = {styles.profilepicWrap}>
+            <Image style = {styles.profilepic} source = {require('./userImage.png')} />
+          </View>
+
+          <Text style = {styles.name2}> {this.state.username} </Text>
+
+        </View>
+      </Image>
+    );
+  }
+}
+
+
+
+class ProfilePage extends Component {
+  
+  renderScene(route, navigator) {
+    var routeId = route.id;
+    switch (routeId) {
+      case 'Login':
+        return (<Login navigator = {navigator} />);
+      case 'SwipeCards':
+        return (<SwipeCards navigator = {navigator} />);
+      case 'ProfilePage':
+        return (<ProfilePage navigator = {navigator} />);
+      case 'RightSwipe':
+        return (<RightSwipe navigator = {navigator} />);
+      case 'OptionScreen':
+        return (<OptionScreen navigator = {navigator} />);
+      case 'MakeBet':
+        return (<MakeBet navigator = {navigator} />)
+    }
+  }
+
+  render() {
+    const ComponentLeft = () => {
+      return(
+        <View style={{ flex: 1, alignItems: 'flex-start'}} >
+           <TouchableOpacity style={ {justifyContent:'center', flexDirection: 'row'}} onPress={() => this.props.navigator.push({id: 'SwipeCards'})}>
+            <Image 
+              source={require('./scores.png')}
+              style={{ resizeMode: 'contain', width: 20, height: 20, alignSelf: 'center' }}
+              onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
+          </TouchableOpacity>
+        </View>
+      );
+    };
+     
+    const ComponentCenter = () => {
+      return(
+        <TouchableOpacity onPress={() => this.props.navigator.push({id: 'SwipeCards'})}>
+           <Image
+            source={require('./placingBet.png')}
+            style={{resizeMode: 'contain', width: 200, height: 35, alignSelf: 'center' }}
+            onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
+        </TouchableOpacity>
+      );
+    };
+     
+    const ComponentRight = () => {
+      return(
+        <View style={{ flex: 1, alignItems: 'flex-end', }}>
+          <TouchableOpacity onPress={() => this.props.navigator.push({id: 'ProfilePage'})}>
+            <Image 
+              source={require('./userImage.png')}
+              style={{ resizeMode: 'contain', width: 20, height: 20, alignSelf: 'center' }}
+              onPress={() => this.props.navigator.push({id: 'ProfilePage'})} />
+          </TouchableOpacity>
+        </View>
+      );
+    };
+
+
+
+    return (
+      <View style = {styles.container}>
+      <NavigationBar 
+          componentLeft     = { () =>  <ComponentLeft />   }
+          componentCenter   = { () =>  <ComponentCenter /> }
+          componentRight    = { () =>  <ComponentRight />  }
+          navigationBarStyle= {{ backgroundColor: '#215e79' }}
+          statusBarStyle    = {{ barStyle: 'light-content', backgroundColor: '#215e79' }}
+        />
+        <Header2 />
+        <Bar2 />
+      </View>
+
+    );
+  }
+}
 
 class RightSwipe extends Component {
  constructor() {
@@ -278,6 +489,24 @@ class SwipeCards extends Component {
 
   }
 
+  renderScene(route, navigator) {
+    var routeId = route.id;
+    switch (routeId) {
+      case 'Login':
+        return (<Login navigator = {navigator} />);
+      case 'SwipeCards':
+        return (<SwipeCards navigator = {navigator} />);
+      case 'ProfilePage':
+        return (<ProfilePage navigator = {navigator} />);
+      case 'RightSwipe':
+        return (<RightSwipe navigator = {navigator} />);
+      case 'OptionScreen':
+        return (<OptionScreen navigator = {navigator} />);
+      case 'MakeBet':
+        return (<MakeBet navigator = {navigator} />)
+    }
+  }
+
   render() {
     let { pan, cards, currentPosition} = this.state;
 
@@ -339,8 +568,53 @@ class SwipeCards extends Component {
     // also note that we render 4 cards for the 'stack' effect. while dragging 3 cards appear under 
     // (but only 2 cards at pan=0)
 
+    const ComponentLeft = () => {
+      return(
+        <View style={{ flex: 1, alignItems: 'flex-start'}} >
+           <TouchableOpacity style={ {justifyContent:'center', flexDirection: 'row'}} onPress={() => this.props.navigator.push({id: 'SwipeCards'})}>
+            <Image 
+              source={require('./scores.png')}
+              style={{ resizeMode: 'contain', width: 20, height: 20, alignSelf: 'center' }}
+              onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
+          </TouchableOpacity>
+        </View>
+      );
+    };
+     
+    const ComponentCenter = () => {
+      return(
+        <TouchableOpacity onPress={() => this.props.navigator.push({id: 'SwipeCards'})}>
+           <Image
+            source={require('./placingBet.png')}
+            style={{resizeMode: 'contain', width: 200, height: 35, alignSelf: 'center' }}
+            onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
+        </TouchableOpacity>
+      );
+    };
+     
+    const ComponentRight = () => {
+      return(
+        <View style={{ flex: 1, alignItems: 'flex-end', }}>
+          <TouchableOpacity onPress={() => this.props.navigator.push({id: 'ProfilePage'})}>
+            <Image 
+              source={require('./userImage.png')}
+              style={{ resizeMode: 'contain', width: 20, height: 20, alignSelf: 'center' }}
+              onPress={() => this.props.navigator.push({id: 'ProfilePage'})} />
+          </TouchableOpacity>
+        </View>
+      );
+    };
+
+
     return (
       <View style={styles.bodyContainer}>
+      <NavigationBar 
+          componentLeft     = { () =>  <ComponentLeft />   }
+          componentCenter   = { () =>  <ComponentCenter /> }
+          componentRight    = { () =>  <ComponentRight />  }
+          navigationBarStyle= {{ backgroundColor: '#215e79' }}
+          statusBarStyle    = {{ barStyle: 'light-content', backgroundColor: '#215e79' }}
+        />
         <View style={styles.responsiveContainer}>
 
           <View style={styles.buttonsContainer}>
@@ -369,6 +643,11 @@ class SwipeCards extends Component {
 }
 
 var styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: '#000'
+  },
   // main container
   bodyContainer: {
     flex: 1,
@@ -519,7 +798,68 @@ var styles = StyleSheet.create({
     color: 'red',
   },
 
+  //User Page
+  headerBackgroundProf: {
+    flex: 1,
+    width: null,
+    alignSelf: 'stretch'
+  },
+  headerProf: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: 'rgba(0,0,0,0.5)'
+  },
+  profilepicWrap: {
+    width: 180,
+    height: 180, 
+    borderRadius: 100,
+    borderColor: 'rgba(0,0,0,0.4)',
+    borderWidth: 16
+  },
+  profilepic: {
+    flex: 1,
+    width: null,
+    alignSelf: 'stretch', 
+    borderRadius: 100,
+    borderColor: '#fff',
+    borderWidth: 4
+  },
+  name2: {
+    marginTop: 20,
+    fontSize: 16,
+    color: '#fff', 
+    fontWeight: 'bold'
+  },
+
+  bar2: {
+    borderTopColor: '#fff',
+    borderTopWidth: 4,
+    backgroundColor: '#ec2e4a',
+    flexDirection: 'row'
+  },
+  barSeparator: {
+    borderRightWidth: 4
+  },
+  barItem: {
+    flex: 1,
+    padding: 18,
+    alignItems: 'center'
+  },
+  barTop: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontStyle: 'italic'
+  },
+  barBottom: {
+    color: '#000',
+    fontSize: 14,
+    fontWeight: 'bold'
+  }
+
+
 });
 
 AppRegistry.registerComponent('ReactNativeTinderSwipe', () => App);
-
