@@ -102,12 +102,15 @@ class App extends Component {
         return (<SwipeCards navigator = {navigator} />);
       case 'ProfilePage':
         return (<ProfilePage navigator = {navigator} />);
+<<<<<<< HEAD
       case 'PlaceBet':
         return (<PlaceBet navigator = {navigator} />);
       case 'RightSwipe':
         return (<RightSwipe navigator = {navigator} />);
       case 'OptionScreen':
         return (<OptionScreen navigator = {navigator} />);
+=======
+>>>>>>> 4cd65fa1ceb9e586f26930dd4305023b3604475a
       case 'MakeBet':
         return (<MakeBet navigator = {navigator} />)
     }
@@ -345,7 +348,7 @@ class Bar2 extends Component {
 
         <View style = {styles.bar2}>
           <View style = {[styles.barItem, styles.barSeparator]}>
-            <Text style = {styles.barTop}> 0 </Text>
+            <Text style = {styles.barTop}> 1000 </Text>
             <Text style = {styles.barBottom}> Tokens </Text>
           </View>
 
@@ -450,7 +453,7 @@ class ProfilePage extends Component {
           <TouchableOpacity onPress={() => this.props.navigator.push({id: 'ProfilePage'})}>
             <Image 
               source={require('./userImage.png')}
-              style={{ resizeMode: 'contain', width: 20, height: 20, alignSelf: 'center' }}
+              style={{ resizeMode: 'contain', width: 100, height: 20, alignSelf: 'center' }}
               onPress={() => this.props.navigator.push({id: 'ProfilePage'})} />
           </TouchableOpacity>
         </View>
@@ -476,25 +479,87 @@ class ProfilePage extends Component {
   }
 }
 
-class RightSwipe extends Component {
- constructor() {
-    super();
-    this.state = {count: 0};
+
+//TODO
+class MakeBet extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { text: '' };
+  }
+  
+  renderScene(route, navigator) {
+    var routeId = route.id;
+    switch (routeId) {
+      case 'Login':
+        return (<Login navigator = {navigator} />);
+      case 'SwipeCards':
+        return (<SwipeCards navigator = {navigator} />);
+      case 'ProfilePage':
+        return (<ProfilePage navigator = {navigator} />);
+      case 'MakeBet':
+        return (<MakeBet navigator = {navigator} />)
+    }
   }
 
-  render () {
+  render() {
+    const ComponentLeft = () => {
+      return(
+        <View style={{ flex: 1, alignItems: 'flex-start'}} >
+           <TouchableOpacity style={ {justifyContent:'center', flexDirection: 'row'}} onPress={() => this.props.navigator.push({id: 'MakeBet'})}>
+            <Image 
+              source={require('./scores.png')}
+              style={{ resizeMode: 'contain', width: 100, height: 20, alignSelf: 'center' }}
+              onPress={() => this.props.navigator.push({id: 'MakeBet'})} />
+          </TouchableOpacity>
+        </View>
+      );
+    };
+     
+    const ComponentCenter = () => {
+      return(
+        <TouchableOpacity onPress={() => this.props.navigator.push({id: 'SwipeCards'})}>
+           <Image
+            source={require('./placingBet.png')}
+            style={{resizeMode: 'contain', width: 100, height: 20, alignSelf: 'center' }}
+            onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
+        </TouchableOpacity>
+      );
+    };
+     
+    const ComponentRight = () => {
+      return(
+        <View style={{ flex: 1, alignItems: 'flex-end', }}>
+          <TouchableOpacity onPress={() => this.props.navigator.push({id: 'ProfilePage'})}>
+            <Image 
+              source={require('./userImage.png')}
+              style={{ resizeMode: 'contain', width: 100, height: 20, alignSelf: 'center' }}
+              onPress={() => this.props.navigator.push({id: 'ProfilePage'})} />
+          </TouchableOpacity>
+        </View>
+      );
+    };
+
+
+
     return (
-      <View style={styles.container}>
-        <Text>{this.state.count}</Text>
-        <Button
-          title="increase"
-          onPress={() => this.setState({ count: this.state.count + 1 })}
+      <View style = {styles.container}>
+      <NavigationBar 
+          componentLeft     = { () =>  <ComponentLeft />   }
+          componentCenter   = { () =>  <ComponentCenter /> }
+          componentRight    = { () =>  <ComponentRight />  }
+          navigationBarStyle= {{ backgroundColor: '#215e79' }}
+          statusBarStyle    = {{ barStyle: 'light-content', backgroundColor: '#215e79' }}
         />
-        <Button
-          title="decrease"
-          onPress={() => this.setState({ count: this.state.count - 1 })}
-        />
+        <TextInput 
+          style={styles.textInput}
+          keyboardType = 'numeric'
+          onChangeText = {(text)=> this.setState({text})}
+          value = {this.state.text}
+        /> 
+
       </View>
+
     );
   }
 }
@@ -725,7 +790,7 @@ class SwipeCards extends Component {
           <TouchableOpacity onPress={() => this.props.navigator.push({id: 'ProfilePage'})}>
             <Image 
               source={require('./userImage.png')}
-              style={{ resizeMode: 'contain', width: 20, height: 20, alignSelf: 'center' }}
+              style={{ resizeMode: 'contain', width: 100, height: 20, alignSelf: 'center' }}
               onPress={() => this.props.navigator.push({id: 'ProfilePage'})} />
           </TouchableOpacity>
         </View>
@@ -773,7 +838,7 @@ var styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#000'
+    backgroundColor: '#fff'
   },
   // main container
   bodyContainer: {
@@ -981,7 +1046,7 @@ var styles = StyleSheet.create({
     fontStyle: 'italic'
   },
   barBottom: {
-    color: '#000',
+    color: '#fff',
     fontSize: 14,
     fontWeight: 'bold'
   }
