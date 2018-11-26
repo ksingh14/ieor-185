@@ -22,6 +22,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { NavigationBar } from 'navigationbar-react-native';
+import DropdownMenu from 'react-native-dropdown-menu';
 
 import clamp from 'clamp';
 import Dimensions from 'Dimensions';
@@ -101,6 +102,8 @@ class App extends Component {
         return (<SwipeCards navigator = {navigator} />);
       case 'ProfilePage':
         return (<ProfilePage navigator = {navigator} />);
+      case 'PlaceBet':
+        return (<PlaceBet navigator = {navigator} />);
       case 'RightSwipe':
         return (<RightSwipe navigator = {navigator} />);
       case 'OptionScreen':
@@ -215,6 +218,126 @@ class MakeBet extends Component {
 }*/
 
 
+class PlaceBet extends Component {
+
+  state = {
+      'play': '',
+      'game': 'Colorado Rockies vs. Los Angeles Dodgers'
+    };
+
+  renderScene(route, navigator) {
+    var routeId = route.id;
+    switch (routeId) {
+      case 'Login':
+        return (<Login navigator = {navigator} />);
+      case 'SwipeCards':
+        return (<SwipeCards navigator = {navigator} />);
+      case 'ProfilePage':
+        return (<ProfilePage navigator = {navigator} />);
+      case 'PlaceBet':
+        return (<PlaceBet navigator = {navigator} />);
+      case 'RightSwipe':
+        return (<RightSwipe navigator = {navigator} />);
+      case 'OptionScreen':
+        return (<OptionScreen navigator = {navigator} />);
+      case 'MakeBet':
+        return (<MakeBet navigator = {navigator} />)
+    }
+  }
+
+  render() {
+    var data = [["Colorado Rockies vs. Los Angeles Dodgers", "Chicago Cubs vs. San Francisco Giants"]];
+    var plays = {"Colorado Rockies vs. Los Angeles Dodgers": [["Rockies win the game", "Rockies will score this inning"]], 
+                 "Chicago Cubs vs. San Francisco Giants": [["Cubs will hit a grand slam", "Cubs will pitch a no-hitter inning"]]};
+
+    const ComponentLeft = () => {
+      return(
+        <View style={{ flex: 1, alignItems: 'flex-start'}} >
+           <TouchableOpacity style={ {justifyContent:'center', flexDirection: 'row'}} onPress={() => this.props.navigator.push({id: 'PlaceBet'})}>
+            <Image 
+              source={require('./placingBet.png')}
+              style={{ resizeMode: 'contain', width: 20, height: 20, alignSelf: 'center' }}
+              onPress={() => this.props.navigator.push({id: 'PlaceBet'})} />
+          </TouchableOpacity>
+        </View>
+      );
+    };
+     
+    const ComponentCenter = () => {
+      return(
+        <TouchableOpacity onPress={() => this.props.navigator.push({id: 'SwipeCards'})}>
+           <Image
+            source={require('./scores.png')}
+            style={{resizeMode: 'contain', width: 200, height: 35, alignSelf: 'center' }}
+            onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
+        </TouchableOpacity>
+      );
+    };
+     
+    const ComponentRight = () => {
+      return(
+        <View style={{ flex: 1, alignItems: 'flex-end', }}>
+          <TouchableOpacity onPress={() => this.props.navigator.push({id: 'ProfilePage'})}>
+            <Image 
+              source={require('./userImage.png')}
+              style={{ resizeMode: 'contain', width: 20, height: 20, alignSelf: 'center' }}
+              onPress={() => this.props.navigator.push({id: 'ProfilePage'})} />
+          </TouchableOpacity>
+        </View>
+      );
+    };
+
+    return (
+      <View style={{flex: 1}}>
+        <View style={{height: 64}} />
+        <DropdownMenu
+          style={{flex: 1}}
+          bgColor={'white'}
+          tintColor={'#666666'}
+          activityTintColor={'green'}
+          // arrowImg={}      
+          // checkImage={}   
+          // optionTextStyle={{color: '#333333'}}
+          // titleStyle={{color: '#333333'}} 
+          // maxHeight={300} 
+          handler={(selection, row) => this.setState({'game': data[selection][row]})}
+          data={data}
+        >
+
+        </DropdownMenu>
+
+        <DropdownMenu
+          style={{flex: 1}}
+          bgColor={'white'}
+          tintColor={'#666666'}
+          activityTintColor={'green'}
+          // arrowImg={}      
+          // checkImage={}   
+          // optionTextStyle={{color: '#333333'}}
+          // titleStyle={{color: '#333333'}} 
+          // maxHeight={300} 
+          handler={(selection, row) => this.setState({'play': plays[this.state.game][selection][row]})}
+          data={plays[this.state.game]}
+        >
+ 
+        </DropdownMenu>
+
+        <NavigationBar 
+          componentLeft     = { () =>  <ComponentLeft />   }
+          componentCenter   = { () =>  <ComponentCenter /> }
+          componentRight    = { () =>  <ComponentRight />  }
+          navigationBarStyle= {{ backgroundColor: '#215e79' }}
+          statusBarStyle    = {{ barStyle: 'light-content', backgroundColor: '#215e79' }}
+        />
+
+      </View>
+    );
+
+  }
+
+}
+
+
 
 class Bar2 extends Component {
   render() {
@@ -285,6 +408,8 @@ class ProfilePage extends Component {
         return (<SwipeCards navigator = {navigator} />);
       case 'ProfilePage':
         return (<ProfilePage navigator = {navigator} />);
+      case 'PlaceBet':
+        return (<PlaceBet navigator = {navigator} />);
       case 'RightSwipe':
         return (<RightSwipe navigator = {navigator} />);
       case 'OptionScreen':
@@ -298,11 +423,11 @@ class ProfilePage extends Component {
     const ComponentLeft = () => {
       return(
         <View style={{ flex: 1, alignItems: 'flex-start'}} >
-           <TouchableOpacity style={ {justifyContent:'center', flexDirection: 'row'}} onPress={() => this.props.navigator.push({id: 'SwipeCards'})}>
+           <TouchableOpacity style={ {justifyContent:'center', flexDirection: 'row'}} onPress={() => this.props.navigator.push({id: 'PlaceBet'})}>
             <Image 
-              source={require('./scores.png')}
+              source={require('./placingBet.png')}
               style={{ resizeMode: 'contain', width: 20, height: 20, alignSelf: 'center' }}
-              onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
+              onPress={() => this.props.navigator.push({id: 'PlaceBet'})} />
           </TouchableOpacity>
         </View>
       );
@@ -312,7 +437,7 @@ class ProfilePage extends Component {
       return(
         <TouchableOpacity onPress={() => this.props.navigator.push({id: 'SwipeCards'})}>
            <Image
-            source={require('./placingBet.png')}
+            source={require('./scores.png')}
             style={{resizeMode: 'contain', width: 200, height: 35, alignSelf: 'center' }}
             onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
         </TouchableOpacity>
@@ -498,6 +623,8 @@ class SwipeCards extends Component {
         return (<SwipeCards navigator = {navigator} />);
       case 'ProfilePage':
         return (<ProfilePage navigator = {navigator} />);
+      case 'PlaceBet':
+        return (<PlaceBet navigator = {navigator} />);
       case 'RightSwipe':
         return (<RightSwipe navigator = {navigator} />);
       case 'OptionScreen':
@@ -571,11 +698,11 @@ class SwipeCards extends Component {
     const ComponentLeft = () => {
       return(
         <View style={{ flex: 1, alignItems: 'flex-start'}} >
-           <TouchableOpacity style={ {justifyContent:'center', flexDirection: 'row'}} onPress={() => this.props.navigator.push({id: 'SwipeCards'})}>
+           <TouchableOpacity style={ {justifyContent:'center', flexDirection: 'row'}} onPress={() => this.props.navigator.push({id: 'PlaceBet'})}>
             <Image 
-              source={require('./scores.png')}
+              source={require('./placingBet.png')}
               style={{ resizeMode: 'contain', width: 20, height: 20, alignSelf: 'center' }}
-              onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
+              onPress={() => this.props.navigator.push({id: 'PlaceBet'})} />
           </TouchableOpacity>
         </View>
       );
@@ -585,7 +712,7 @@ class SwipeCards extends Component {
       return(
         <TouchableOpacity onPress={() => this.props.navigator.push({id: 'SwipeCards'})}>
            <Image
-            source={require('./placingBet.png')}
+            source={require('./scores.png')}
             style={{resizeMode: 'contain', width: 200, height: 35, alignSelf: 'center' }}
             onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
         </TouchableOpacity>
