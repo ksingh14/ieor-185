@@ -106,10 +106,6 @@ class App extends Component {
         return (<PlaceBet navigator = {navigator} />);
       case 'RightSwipe':
         return (<RightSwipe navigator = {navigator} />);
-      case 'OptionScreen':
-        return (<OptionScreen navigator = {navigator} />);
-      case 'MakeBet':
-        return (<MakeBet navigator = {navigator} />)
     }
   }
 
@@ -199,30 +195,15 @@ class Login extends Component {
 }
 }
 
-/*class OptionScreen extends Component {
-  render() {
-    //two buttons
-    return (
-      );
-  }
-}
-class MakeBet extends Component {
-  constructor() {
-    super()
-    //global var for self bet here
-  }
-  render() {
-    return (
-      );
-  }
-}*/
-
 
 class PlaceBet extends Component {
 
   state = {
       'play': '',
-      'game': 'Colorado Rockies vs. Los Angeles Dodgers'
+      'game': 'Colorado Rockies vs. Los Angeles Dodgers',
+      'odds': '',
+      'previous_selection': 0,
+      'previous_row': 0
     };
 
   renderScene(route, navigator) {
@@ -238,10 +219,6 @@ class PlaceBet extends Component {
         return (<PlaceBet navigator = {navigator} />);
       case 'RightSwipe':
         return (<RightSwipe navigator = {navigator} />);
-      case 'OptionScreen':
-        return (<OptionScreen navigator = {navigator} />);
-      case 'MakeBet':
-        return (<MakeBet navigator = {navigator} />)
     }
   }
 
@@ -249,6 +226,8 @@ class PlaceBet extends Component {
     var data = [["Colorado Rockies vs. Los Angeles Dodgers", "Chicago Cubs vs. San Francisco Giants"]];
     var plays = {"Colorado Rockies vs. Los Angeles Dodgers": [["Rockies win the game", "Rockies will score this inning"]], 
                  "Chicago Cubs vs. San Francisco Giants": [["Cubs will hit a grand slam", "Cubs will pitch a no-hitter inning"]]};
+    var stat_odds = {"Rockies win the game": "2:1", "Rockies will score this inning": "4:1", "Cubs will hit a grand slam": "128:1",
+                     "Cubs will pitch a no-hitter inning": "38:1"};
 
     const ComponentLeft = () => {
       return(
@@ -289,6 +268,15 @@ class PlaceBet extends Component {
 
     return (
       <View style={{flex: 1}}>
+
+      <NavigationBar 
+          componentLeft     = { () =>  <ComponentLeft />   }
+          componentCenter   = { () =>  <ComponentCenter /> }
+          componentRight    = { () =>  <ComponentRight />  }
+          navigationBarStyle= {{ backgroundColor: '#215e79' }}
+          statusBarStyle    = {{ barStyle: 'light-content', backgroundColor: '#215e79' }}
+        />
+
         <View style={{height: 64}} />
         <DropdownMenu
           style={{flex: 1}}
@@ -300,7 +288,12 @@ class PlaceBet extends Component {
           // optionTextStyle={{color: '#333333'}}
           // titleStyle={{color: '#333333'}} 
           // maxHeight={300} 
-          handler={(selection, row) => this.setState({'game': data[selection][row]})}
+          //handler={(selection, row) => this.setState({'game': data[selection][row]})}
+          handler = {(selection, row) => this.setState(state => ({
+                    'game': data[selection][row],
+                    'play': plays[data[selection][row]][this.state.previous_selection][this.state.previous_row],
+                    odds: stat_odds[plays[data[selection][row]][this.state.previous_selection][this.state.previous_row]]
+                  }))}
           data={data}
         >
 
@@ -316,19 +309,24 @@ class PlaceBet extends Component {
           // optionTextStyle={{color: '#333333'}}
           // titleStyle={{color: '#333333'}} 
           // maxHeight={300} 
-          handler={(selection, row) => this.setState({'play': plays[this.state.game][selection][row]})}
+          //handler={(selection, row) => this.setState({'play': plays[this.state.game][selection][row]})}
+          handler = {(selection, row) => this.setState(state => ({
+                    'game': this.state.game,
+                    'play': plays[this.state.game][selection][row],
+                    odds: stat_odds[plays[this.state.game][selection][row]],
+                    previous_selection: selection,
+                    previous_row: row
+                  }))}
           data={plays[this.state.game]}
         >
+
+        <View style={{flex: 1}}>
+            <Text>
+              The odds that the {this.state.play} is {this.state.odds}.
+            </Text>
+          </View>
  
         </DropdownMenu>
-
-        <NavigationBar 
-          componentLeft     = { () =>  <ComponentLeft />   }
-          componentCenter   = { () =>  <ComponentCenter /> }
-          componentRight    = { () =>  <ComponentRight />  }
-          navigationBarStyle= {{ backgroundColor: '#215e79' }}
-          statusBarStyle    = {{ barStyle: 'light-content', backgroundColor: '#215e79' }}
-        />
 
       </View>
     );
@@ -412,10 +410,6 @@ class ProfilePage extends Component {
         return (<PlaceBet navigator = {navigator} />);
       case 'RightSwipe':
         return (<RightSwipe navigator = {navigator} />);
-      case 'OptionScreen':
-        return (<OptionScreen navigator = {navigator} />);
-      case 'MakeBet':
-        return (<MakeBet navigator = {navigator} />)
     }
   }
 
@@ -476,90 +470,6 @@ class ProfilePage extends Component {
   }
 }
 
-
-//TODO
-class MakeBet extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = { text: '' };
-  }
-  
-  renderScene(route, navigator) {
-    var routeId = route.id;
-    switch (routeId) {
-      case 'Login':
-        return (<Login navigator = {navigator} />);
-      case 'SwipeCards':
-        return (<SwipeCards navigator = {navigator} />);
-      case 'ProfilePage':
-        return (<ProfilePage navigator = {navigator} />);
-      case 'MakeBet':
-        return (<MakeBet navigator = {navigator} />)
-    }
-  }
-
-  render() {
-    const ComponentLeft = () => {
-      return(
-        <View style={{ flex: 1, alignItems: 'flex-start'}} >
-           <TouchableOpacity style={ {justifyContent:'center', flexDirection: 'row'}} onPress={() => this.props.navigator.push({id: 'MakeBet'})}>
-            <Image 
-              source={require('./scores.png')}
-              style={{ resizeMode: 'contain', width: 100, height: 20, alignSelf: 'center' }}
-              onPress={() => this.props.navigator.push({id: 'MakeBet'})} />
-          </TouchableOpacity>
-        </View>
-      );
-    };
-     
-    const ComponentCenter = () => {
-      return(
-        <TouchableOpacity onPress={() => this.props.navigator.push({id: 'SwipeCards'})}>
-           <Image
-            source={require('./placingBet.png')}
-            style={{resizeMode: 'contain', width: 100, height: 20, alignSelf: 'center' }}
-            onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
-        </TouchableOpacity>
-      );
-    };
-     
-    const ComponentRight = () => {
-      return(
-        <View style={{ flex: 1, alignItems: 'flex-end', }}>
-          <TouchableOpacity onPress={() => this.props.navigator.push({id: 'ProfilePage'})}>
-            <Image 
-              source={require('./userImage.png')}
-              style={{ resizeMode: 'contain', width: 100, height: 20, alignSelf: 'center' }}
-              onPress={() => this.props.navigator.push({id: 'ProfilePage'})} />
-          </TouchableOpacity>
-        </View>
-      );
-    };
-
-
-
-    return (
-      <View style = {styles.container}>
-      <NavigationBar 
-          componentLeft     = { () =>  <ComponentLeft />   }
-          componentCenter   = { () =>  <ComponentCenter /> }
-          componentRight    = { () =>  <ComponentRight />  }
-          navigationBarStyle= {{ backgroundColor: '#215e79' }}
-          statusBarStyle    = {{ barStyle: 'light-content', backgroundColor: '#215e79' }}
-        />
-        <TextInput 
-          style={styles.textInput}
-          keyboardType = 'numeric'
-          onChangeText = {(text)=> this.setState({text})}
-          value = {this.state.text}
-        /> 
-
-      </View>
-
-    );
-  }
-}
 
 class Card extends Component {
   render() {
@@ -689,10 +599,6 @@ class SwipeCards extends Component {
         return (<PlaceBet navigator = {navigator} />);
       case 'RightSwipe':
         return (<RightSwipe navigator = {navigator} />);
-      case 'OptionScreen':
-        return (<OptionScreen navigator = {navigator} />);
-      case 'MakeBet':
-        return (<MakeBet navigator = {navigator} />)
     }
   }
 
