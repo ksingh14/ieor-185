@@ -115,6 +115,13 @@ class Login extends Component {
 
   state = {'username': '', 'password': ''};
 
+  _onLogin = () => {
+    this._storeItem.bind(this);
+    this.props.navigator.push({
+      id: 'SwipeCards',
+    });
+  };
+
   render() {
     return (
         <ScrollView style={styles.scroll}>
@@ -145,21 +152,13 @@ class Login extends Component {
                     onChangeText={ (password) => this.setState({ password }) }
                 />
             </Container>
-
-            <Container>
-                <Button 
-                    styles={{button: styles.transparentButton}}
-                    onPress={() => this.props.navigator.push({id: 'SwipeCards'})}
-                >
-                </Button>
-            </Container>
-   
+            
             <View style={styles.footer}>
                 <Container>
                     <Button 
                         label="Sign In" 
                         styles={{button: styles.primaryButton, label: styles.buttonWhiteText}} 
-                        onPress={() => this.props.navigator.push({id: 'SwipeCards'})} />
+                        onPress={this._onLogin} />
                 </Container>
 
                 <Container>
@@ -334,6 +333,12 @@ class PlaceBet extends Component {
           </View>
  
         </DropdownMenu>
+
+        <View style={{flex: 1}}>
+           <Text>
+             Place your bet:
+          </Text>
+        </View>
         <TextInput 
           style={styles.textInput}
           keyboardType = 'numeric'
