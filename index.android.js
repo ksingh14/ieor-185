@@ -102,15 +102,12 @@ class App extends Component {
         return (<SwipeCards navigator = {navigator} />);
       case 'ProfilePage':
         return (<ProfilePage navigator = {navigator} />);
-<<<<<<< HEAD
       case 'PlaceBet':
         return (<PlaceBet navigator = {navigator} />);
       case 'RightSwipe':
         return (<RightSwipe navigator = {navigator} />);
       case 'OptionScreen':
         return (<OptionScreen navigator = {navigator} />);
-=======
->>>>>>> 4cd65fa1ceb9e586f26930dd4305023b3604475a
       case 'MakeBet':
         return (<MakeBet navigator = {navigator} />)
     }
