@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "navigationbar-react-native": "0.0.5",
-    "react-native": "^0.21.0",
+    "react-native": "^0.70.6",
     "react-native-dropdown-menu": "^2.0.0",
     "react-native-modal-dropdown": "^0.6.2"
   }
